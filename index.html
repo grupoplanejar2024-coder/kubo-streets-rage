@@ -1,217 +1,86 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#121212">
-
     <title>Streets of Rage - Kubo Touch</title>
-
     <style>
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html, body {
-            margin: 0;
-            min-height: 100%;
-            background: #121212;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            overscroll-behavior: none;
-        }
-
-        body {
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        header {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 10;
-        }
-
-        .badge {
-            background: #1a4dcc;
-            padding: 7px 12px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .game-card {
-            width: 100%;
-            max-width: 500px;
-            background: #1e1e1e;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px #0008;
-        }
-
-        .cover-container {
-            width: 100%;
-            height: 260px;
-            background: #000 url("sor-cover.jpg") center / contain no-repeat;
-}
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        h1 {
-            margin-top: 0;
-            color: #3388ff;
-            font-size: 25px;
-        }
-
-        .meta-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-            color: #aaa;
-            font-size: 12px;
-        }
-
-        .description, .details {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #ddd;
-        }
-
-        .details {
-            margin-bottom: 20px;
-        }
-
-        .btn-play {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            border: 0;
-            border-radius: 7px;
-            background: #1a4dcc;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-
-        .btn-play:hover {
-            background: #123599;
-        }
-
-        #game-container {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            transform: translateZ(0);
-            will-change: transform;
-        }
-
-        #game-container.active {
-            display: block;
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 12px;
-            }
-            .cover-container {
-                height: 220px;
-            }
-            .content {
-                padding: 16px;
-            }
-        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #121212; color: #fff; font-family: Arial, sans-serif; }
+        header { text-align: center; padding: 15px; background: #1e1e1e; }
+        .badge { background: #e74c3c; color: #fff; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 14px; }
+        #game-card { max-width: 500px; margin: 20px auto; background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .cover-container { width: 100%; height: 250px; background-image: url('sor-cover.jpg'); background-size: cover; background-position: center; }
+        .content { padding: 20px; }
+        h1 { margin: 0 0 10px 0; font-size: 24px; color: #e74c3c; }
+        .meta-info { display: flex; gap: 10px; margin-bottom: 15px; font-size: 13px; color: #aaa; }
+        .description { font-size: 14px; line-height: 1.5; color: #ddd; margin-bottom: 15px; }
+        .details { font-size: 13px; color: #bbb; margin-bottom: 20px; }
+        .details ul { padding-left: 20px; margin: 0; }
+        .btn-play { display: block; width: 100%; padding: 12px; background: #c0392b; color: #fff; border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; text-align: center; text-decoration: none; }
+        .btn-play:hover { background: #a93226; }
+        #game-container { display: none; width: 100%; height: 100vh; }
+        #game { width: 100%; height: 100%; }
     </style>
 </head>
-
 <body>
 
     <header>
         <span class="badge">KUBO TOUCH</span>
     </header>
 
-    <main class="game-card" id="game-card">
+    <div id="game-card">
         <div class="cover-container"></div>
-
         <div class="content">
             <h1>Streets of Rage</h1>
-
+            
             <div class="meta-info">
                 <span>🎮 1-2 Jogadores</span>
                 <span>📅 1991</span>
-                <span>🕹️ SEGA / Mega Drive</span>
+                <span>🕹️ SEGA</span>
             </div>
 
             <p class="description">
-                Lute contra o sindicato do crime nas ruas da cidade com Axel, Blaze e Adam usando socos, chutes e armas improvisadas!
+                Uma sindicata criminosa tomou conta da cidade. Lute ao lado dos ex-policiais Axel, Blaze e Adam para restaurar a paz nas ruas!
             </p>
 
             <div class="details">
                 <ul>
-                    <li><strong>🔥 Curiosidade:</strong> Conta com uma das trilhas sonoras eletrônicas mais icônicas da era 16-bits composta por Yuzo Koshiro.</li>
-                    <li><strong>⚡ Gênero:</strong> Beat 'em up / Ação</li>
+                    <li><strong>🕹️ Gênero:</strong> Beat 'em up / Ação</li>
                 </ul>
             </div>
 
-            <button class="btn-play" id="path-button" onclick="startGame()">
-                JOGAR AGORA
-            </button>
+            <button class="btn-play" onclick="startEmulator()">JOGAR AGORA</button>
         </div>
-    </main>
+    </div>
 
-    <div id="game-container"></div>
+    <div id="game-container">
+        <div id="game"></div>
+    </div>
 
-    <script>
-        function startGame() {
-            const container = document.getElementById("game-container");
+    <script type="text/javascript">
+        function startEmulator() {
+            // Esconde o card e mostra o contentor do jogo ocupando a tela toda
+            document.getElementById('game-card').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
 
-            document.getElementById("game-card").style.display = "none";
-            container.style.display = "block";
-            container.innerHTML = "";
-
-            // Configurações do EmulatorJS otimizadas para mobile
-            window.EJS_player = "#game-container";
-            window.EJS_core = "segaMD";
-            // Nota: Lembre-se de atualizar o link da ROM para o repositório correto do Streets of Rage no seu GitHub
-            window.EJS_gameUrl = window.EJS_gameUrl = "https://raw.githubusercontent.com/grupoplanejar2024-coder/kubo-streets-of-rage/main/sor1.bin";
-            window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
-            window.EJS_gameName = "Streets of Rage";
-            window.EJS_language = "pt-BR";
+            // Configurações do EmulatorJS para SEGA Mega Drive
+            window.EJS_player = '#game';
+            window.EJS_core = 'segaMD';
+            window.EJS_gameName = 'Streets of Rage';
+            window.EJS_color = '#e74c3c';
             window.EJS_startOnLoaded = true;
-            
-            // Otimizações de desempenho
-            window.EJS_disableDatabases = true;
-            window.EJS_threads = false;
+            window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+            window.EJS_gameUrl = 'sor1.bin';
 
-            const oldLoader = document.getElementById("emulatorjs-loader");
-            if (oldLoader) oldLoader.remove();
-
-            const script = document.createElement("script");
-            script.id = "emulatorjs-loader";
-            script.src = window.EJS_pathtodata + "loader.js";
+            // Injeta o loader do EmulatorJS com tratamento de erro
+            var script = document.createElement('script');
+            script.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
             script.async = true;
-
-            script.onerror = function () {
-                alert("Erro ao carregar o EmulatorJS. Verifique a conexão.");
+            script.onerror = function() {
+                alert('Erro ao carregar o motor do emulador. Verifique a sua ligação.');
             };
-
             document.body.appendChild(script);
         }
     </script>
-
 </body>
 </html>
