@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#121212">
 
     <title>Streets of Rage - Kubo Touch</title>
@@ -10,6 +10,7 @@
     <style>
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
@@ -18,6 +19,7 @@
             background: #121212;
             color: #fff;
             font-family: Arial, sans-serif;
+            overscroll-behavior: none;
         }
 
         body {
@@ -36,7 +38,7 @@
         }
 
         .badge {
-            background: #cc1a1a;
+            background: #1a4dcc;
             padding: 7px 12px;
             border-radius: 5px;
             font-size: 12px;
@@ -55,7 +57,7 @@
         .cover-container {
             width: 100%;
             height: 260px;
-            background: #000 url("sor-cover.jpg") center / contain no-repeat;
+            background: #000 url("streets-of-rage-cover.jpg") center / contain no-repeat;
         }
 
         .content {
@@ -64,7 +66,7 @@
 
         h1 {
             margin-top: 0;
-            color: #ff4444;
+            color: #3388ff;
             font-size: 25px;
         }
 
@@ -93,15 +95,16 @@
             padding: 14px;
             border: 0;
             border-radius: 7px;
-            background: #cc1a1a;
+            background: #1a4dcc;
             color: white;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         .btn-play:hover {
-            background: #991212;
+            background: #123599;
         }
 
         #game-container {
@@ -112,31 +115,12 @@
             width: 100%;
             height: 100%;
             background: #000;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         #game-container.active {
             display: block;
-        }
-
-        #status {
-            margin-top: 12px;
-            color: #ffcc66;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        #back-button {
-            display: none;
-            position: fixed;
-            top: 8px;
-            left: 8px;
-            z-index: 1000;
-            padding: 9px 12px;
-            border: 0;
-            border-radius: 6px;
-            background: #cc1a1a;
-            color: white;
-            cursor: pointer;
         }
 
         @media (max-width: 480px) {
@@ -166,33 +150,27 @@
             <h1>Streets of Rage</h1>
 
             <div class="meta-info">
-                <span>🎮 1 a 2 Jogadores</span>
+                <span>🎮 1-2 Jogadores</span>
                 <span>📅 1991</span>
                 <span>🕹️ SEGA / Mega Drive</span>
             </div>
 
             <p class="description">
-                Lute contra o crime nas ruas da cidade com Adam, Axel e Blaze para derrotar o sindicato do misterioso Mr. X!
+                Lute contra o sindicato do crime nas ruas da cidade com Axel, Blaze e Adam usando socos, chutes e armas improvisadas!
             </p>
 
             <div class="details">
                 <ul>
-                    <li><strong>🔥 Trilha Sonora:</strong> Composta por Yuzo Koshiro, é uma das mais aclamadas dos 16-bits.</li>
+                    <li><strong>🔥 Curiosidade:</strong> Conta com uma das trilhas sonoras eletrônicas mais icônicas da era 16-bits composta por Yuzo Koshiro.</li>
                     <li><strong>⚡ Gênero:</strong> Beat 'em up / Ação</li>
                 </ul>
             </div>
 
-            <button class="btn-play" id="play-button" onclick="startGame()">
+            <button class="btn-play" id="path-button" onclick="startGame()">
                 JOGAR AGORA
             </button>
-
-            <div id="status" role="status"></div>
         </div>
     </main>
-
-    <button id="back-button" onclick="backToMenu()">
-        ← Voltar ao menu
-    </button>
 
     <div id="game-container"></div>
 
@@ -204,13 +182,19 @@
             container.style.display = "block";
             container.innerHTML = "";
 
+            // Configurações do EmulatorJS otimizadas para mobile
             window.EJS_player = "#game-container";
-            window.EJS_core = 'genesis_plus_gx';
-            window.EJS_gameUrl = "https://raw.githubusercontent.com/grupoplanejar2024-coder/kubo-streets-rage/main/sor1.bin";
+            window.EJS_core = "segaMD";
+            // Nota: Lembre-se de atualizar o link da ROM para o repositório correto do Streets of Rage no seu GitHub
+            window.EJS_gameUrl = "https://raw.githubusercontent.com/grupoplanejar2024-coder/kubo-streets-of-rage/main/streets-of-rage.gen";
             window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
             window.EJS_gameName = "Streets of Rage";
             window.EJS_language = "pt-BR";
             window.EJS_startOnLoaded = true;
+            
+            // Otimizações de desempenho
+            window.EJS_disableDatabases = true;
+            window.EJS_threads = false;
 
             const oldLoader = document.getElementById("emulatorjs-loader");
             if (oldLoader) oldLoader.remove();
@@ -225,10 +209,6 @@
             };
 
             document.body.appendChild(script);
-        }
-
-        function backToMenu() {
-            location.reload();
         }
     </script>
 
